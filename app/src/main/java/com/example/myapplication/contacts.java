@@ -78,17 +78,4 @@ contacts extends AppCompatActivity {
     }
 
     }
-   /* Initialise here..
-        SharedPreferences msharedpref = getSharedPreferences("msh",
-        MODE_PRIVATE);
-        Editor editor = msharedpref.edit();
 
-        store data...
-        editor.putString("id",uida); //uida is your string to be stored
-        editor.commit();
-        finish();
-
-
-        fetch...
-        SharedPreferences prefs = this.getSharedPreferences("msh", Context.MODE_PRIVATE);
-        uida = prefs.getString("id", "");*/
