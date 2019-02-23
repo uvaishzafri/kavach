@@ -33,6 +33,7 @@
                android:layout_height="match_parent"
                android:src="@drawable/edit"
                android:layout_weight="1"
+               android:id="@+id/imgedit"
                />
 
 
@@ -52,6 +53,7 @@
                android:layout_width="0dp"
                android:layout_height="match_parent"
                android:text="@string/timer"
+               android:textColor="#33C4FF"
                android:layout_gravity="center_horizontal"
                android:textSize="100sp"
                android:gravity="center"

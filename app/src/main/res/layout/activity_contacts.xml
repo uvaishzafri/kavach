@@ -8,42 +8,48 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="ExtraText">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:hint="CONTACT ONE"
             tools:ignore="Suspicious0dp"
-            android:textColor="#33C4FF"/>
+            android:textColor="#33C4FF"
+            android:id="@+id/etContactOne"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:hint="CONTACT TWO"
             tools:ignore="Suspicious0dp"
-            android:textColor="#33C4FF"/>
+            android:textColor="#33C4FF"
+            android:id="@+id/etContactTwo"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:hint="CONTACT THREE"
             tools:ignore="Suspicious0dp"
-            android:textColor="#33C4FF"/>
+            android:textColor="#33C4FF"
+            android:id="@+id/etContactThree"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:hint="CONTACT FOUR"
             tools:ignore="Suspicious0dp"
-            android:textColor="#33C4FF"/>
+            android:textColor="#33C4FF"
+            android:id="@+id/etContactFour"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:hint="CONTACT FIVE"
             tools:ignore="Suspicious0dp"
-            android:textColor="#33C4FF"/>
+            android:textColor="#33C4FF"
+            android:id="@+id/etContactFive"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -61,6 +67,7 @@
             android:gravity="end|fill_vertical|clip_horizontal|bottom"
             android:textColor="#33C4FF"
             android:text="SAVE"
+            android:id="@+id/btnsave"
             />
         </LinearLayout>
     </LinearLayout>

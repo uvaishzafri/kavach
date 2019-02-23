@@ -7,23 +7,36 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import static com.example.myapplication.contacts.MyPREFERENCES;
+import static com.example.myapplication.contacts.c1;
+import static com.example.myapplication.contacts.c2;
+import static com.example.myapplication.contacts.c3;
+import static com.example.myapplication.contacts.c4;
+import static com.example.myapplication.contacts.c5;
 
-public class settings extends AppCompatActivity implements AdapterView.OnItemClickListener{
+
+public class settings extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private static final String TAG = "MainActivity";
 
     BluetoothAdapter mBluetoothAdapter;
@@ -33,6 +46,9 @@ public class settings extends AppCompatActivity implements AdapterView.OnItemCli
 
     Button btnStartConnection;
     Button btnSend;
+
+    SharedPreferences sharedpreferences;
+
 
     EditText etSend;
 
@@ -56,7 +72,7 @@ public class settings extends AppCompatActivity implements AdapterView.OnItemCli
             if (action.equals(mBluetoothAdapter.ACTION_STATE_CHANGED)) {
                 final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, mBluetoothAdapter.ERROR);
 
-                switch(state){
+                switch (state) {
                     case BluetoothAdapter.STATE_OFF:
                         Log.d(TAG, "onReceive: STATE OFF");
                         break;
@@ -113,8 +129,6 @@ public class settings extends AppCompatActivity implements AdapterView.OnItemCli
     };
 
 
-
-
     /**
      * Broadcast Receiver for listing devices that are not yet paired
      * -Executed by btnDiscover() method.
@@ -125,8 +139,8 @@ public class settings extends AppCompatActivity implements AdapterView.OnItemCli
             final String action = intent.getAction();
             Log.d(TAG, "onReceive: ACTION FOUND.");
 
-            if (action.equals(BluetoothDevice.ACTION_FOUND)){
-                BluetoothDevice device = intent.getParcelableExtra (BluetoothDevice.EXTRA_DEVICE);
+            if (action.equals(BluetoothDevice.ACTION_FOUND)) {
+                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 mBTDevices.add(device);
                 Log.d(TAG, "onReceive: " + device.getName() + ": " + device.getAddress());
                 mDeviceListAdapter = new DeviceListAdapter(context, R.layout.device_adapter_view, mBTDevices);
@@ -143,11 +157,11 @@ public class settings extends AppCompatActivity implements AdapterView.OnItemCli
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
 
-            if(action.equals(BluetoothDevice.ACTION_BOND_STATE_CHANGED)){
+            if (action.equals(BluetoothDevice.ACTION_BOND_STATE_CHANGED)) {
                 BluetoothDevice mDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 //3 cases:
                 //case1: bonded already
-                if (mDevice.getBondState() == BluetoothDevice.BOND_BONDED){
+                if (mDevice.getBondState() == BluetoothDevice.BOND_BONDED) {
                     Log.d(TAG, "BroadcastReceiver: BOND_BONDED.");
                     //inside BroadcastReceiver4
                     mBTDevice = mDevice;
@@ -163,7 +177,6 @@ public class settings extends AppCompatActivity implements AdapterView.OnItemCli
             }
         }
     };
-
 
 
     @Override
@@ -185,7 +198,6 @@ public class settings extends AppCompatActivity implements AdapterView.OnItemCli
         btnEnableDisable_Discoverable = (Button) findViewById(R.id.btnDiscoverable_on_off);
         lvNewDevices = (ListView) findViewById(R.id.lvNewDevices);
         mBTDevices = new ArrayList<>();
-
 
 
         //Broadcasts when bond state changes (ie:pairing)
@@ -216,7 +228,7 @@ public class settings extends AppCompatActivity implements AdapterView.OnItemCli
             @Override
             public void onClick(View view) {
                 byte[] bytes = etSend.getText().toString().getBytes(Charset.defaultCharset());
-                mBluetoothConnection.write(bytes);
+                // mBluetoothConnection.write(bytes);
             }
         });
 
@@ -224,26 +236,25 @@ public class settings extends AppCompatActivity implements AdapterView.OnItemCli
 
     //create method for starting connection
 //***remember the conncction will fail and app will crash if you haven't paired first
-    public void startConnection(){
-        startBTConnection(mBTDevice,MY_UUID_INSECURE);
+    public void startConnection() {
+        startBTConnection(mBTDevice, MY_UUID_INSECURE);
     }
 
     /**
      * starting chat service method
      */
-    public void startBTConnection(BluetoothDevice device, UUID uuid){
+    public void startBTConnection(BluetoothDevice device, UUID uuid) {
         Log.d(TAG, "startBTConnection: Initializing RFCOM Bluetooth Connection.");
 
-        mBluetoothConnection.startClient(device,uuid);
+        mBluetoothConnection.startClient(device, uuid);
     }
 
 
-
-    public void enableDisableBT(){
-        if(mBluetoothAdapter == null){
+    public void enableDisableBT() {
+        if (mBluetoothAdapter == null) {
             Log.d(TAG, "enableDisableBT: Does not have BT capabilities.");
         }
-        if(!mBluetoothAdapter.isEnabled()){
+        if (!mBluetoothAdapter.isEnabled()) {
             Log.d(TAG, "enableDisableBT: enabling BT.");
             Intent enableBTIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivity(enableBTIntent);
@@ -251,7 +262,7 @@ public class settings extends AppCompatActivity implements AdapterView.OnItemCli
             IntentFilter BTIntent = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
             registerReceiver(mBroadcastReceiver1, BTIntent);
         }
-        if(mBluetoothAdapter.isEnabled()){
+        if (mBluetoothAdapter.isEnabled()) {
             Log.d(TAG, "enableDisableBT: disabling BT.");
             mBluetoothAdapter.disable();
 
@@ -270,7 +281,7 @@ public class settings extends AppCompatActivity implements AdapterView.OnItemCli
         startActivity(discoverableIntent);
 
         IntentFilter intentFilter = new IntentFilter(mBluetoothAdapter.ACTION_SCAN_MODE_CHANGED);
-        registerReceiver(mBroadcastReceiver2,intentFilter);
+        registerReceiver(mBroadcastReceiver2, intentFilter);
 
     }
 
@@ -278,7 +289,7 @@ public class settings extends AppCompatActivity implements AdapterView.OnItemCli
     public void btnDiscover(View view) {
         Log.d(TAG, "btnDiscover: Looking for unpaired devices.");
 
-        if(mBluetoothAdapter.isDiscovering()){
+        if (mBluetoothAdapter.isDiscovering()) {
             mBluetoothAdapter.cancelDiscovery();
             Log.d(TAG, "btnDiscover: Canceling discovery.");
 
@@ -289,7 +300,7 @@ public class settings extends AppCompatActivity implements AdapterView.OnItemCli
             IntentFilter discoverDevicesIntent = new IntentFilter(BluetoothDevice.ACTION_FOUND);
             registerReceiver(mBroadcastReceiver3, discoverDevicesIntent);
         }
-        if(!mBluetoothAdapter.isDiscovering()){
+        if (!mBluetoothAdapter.isDiscovering()) {
 
             //check BT permissions in manifest
             checkBTPermissions();
@@ -304,19 +315,19 @@ public class settings extends AppCompatActivity implements AdapterView.OnItemCli
      * This method is required for all devices running API23+
      * Android must programmatically check the permissions for bluetooth. Putting the proper permissions
      * in the manifest is not enough.
-     *
+     * <p>
      * NOTE: This will only execute on versions > LOLLIPOP because it is not needed otherwise.
      */
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void checkBTPermissions() {
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP){
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             int permissionCheck = this.checkSelfPermission("Manifest.permission.ACCESS_FINE_LOCATION");
             permissionCheck += this.checkSelfPermission("Manifest.permission.ACCESS_COARSE_LOCATION");
             if (permissionCheck != 0) {
 
                 this.requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1001); //Any number
             }
-        }else{
+        } else {
             Log.d(TAG, "checkBTPermissions: No need to check permissions. SDK version < LOLLIPOP.");
         }
     }
@@ -335,12 +346,56 @@ public class settings extends AppCompatActivity implements AdapterView.OnItemCli
 
         //create the bond.
         //NOTE: Requires API 17+? I think this is JellyBean
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2){
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
             Log.d(TAG, "Trying to pair with " + deviceName);
             mBTDevices.get(i).createBond();
+            SendMsgToContacts();
 
             mBTDevice = mBTDevices.get(i);
             mBluetoothConnection = new BluetoothConnectionService(settings.this);
         }
     }
+
+    public void SendMsgToContacts() {
+        final int MY_PERMISSIONS_REQUEST_SEND_SMS = 1;
+
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.SEND_SMS)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.SEND_SMS)) {
+            } else {
+                // permission is already granted
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.SEND_SMS},
+                        MY_PERMISSIONS_REQUEST_SEND_SMS);
+            }
+        } else {
+            SmsManager smsManager = SmsManager.getDefault();
+            String smsbody="I am in danger please help me .Use life 360 app to get my live location";
+            sharedpreferences = getSharedPreferences(MyPREFERENCES,contacts.MODE_PRIVATE);
+
+            SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
+
+            if (sharedpreferences!= null) {
+                String contactone = prefs.getString(c1, "");
+                String contacttwo = prefs.getString(c2, "");
+                String contactthree = prefs.getString(c3, "");
+                String contactfour = prefs.getString(c4, "");
+                String contactfive = prefs.getString(c5, "");
+
+
+                smsManager.sendTextMessage(contactone, null, smsbody, null, null);
+                smsManager.sendTextMessage(contacttwo, null, smsbody, null, null);
+                smsManager.sendTextMessage(contactthree, null, smsbody, null, null);
+                smsManager.sendTextMessage(contactfour, null, smsbody, null, null);
+                smsManager.sendTextMessage(contactfive, null, smsbody, null, null);
+
+                Toast.makeText(getApplicationContext(), "SMS sent.",
+                        Toast.LENGTH_LONG).show();
+            }
+        }
+
+}
 }
