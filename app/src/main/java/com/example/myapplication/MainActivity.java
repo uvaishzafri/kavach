@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         tvsettings = (TextView) findViewById(R.id.tvsettings);
 
         checkBTpermissions();
-        send();
+
         imageEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,30 +45,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void send()
-    {
-        try {
 
-
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage("9811873407", null, "hello from app", null, null);
-            Toast.makeText(MainActivity.this,"Message sent",Toast.LENGTH_LONG);
-        }
-        catch (Exception ex){
-            Toast.makeText(MainActivity.this,"Message  not sent",Toast.LENGTH_LONG);
-            ex.printStackTrace();
-        }
-    }
         @RequiresApi(api = Build.VERSION_CODES.M)
                 private void checkBTpermissions()
         {
             if(Build.VERSION.SDK_INT>Build.VERSION_CODES.LOLLIPOP_MR1) {
-                int permissioncheck=this.checkSelfPermission("Manifest.permission.SEND_SMS");
-            }
-            int permissioncheck=this.checkSelfPermission("Manifest.permission.SEND_SMS");
-            if(permissioncheck!=0)
-            {
-                this.requestPermissions(new String[]{Manifest.permission.SEND_SMS},1001);
+                int permissioncheck = this.checkSelfPermission("Manifest.permission.SEND_SMS");
+
+                if (permissioncheck != 0) {
+                    this.requestPermissions(new String[]{Manifest.permission.SEND_SMS}, 1001);
+                }
             }
         }
 
