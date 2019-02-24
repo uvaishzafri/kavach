@@ -87,6 +87,7 @@
           android:layout_weight="2"
            android:textColor="#33C4FF"
            android:text="SHOW SETTINGS"
+           android:id="@+id/tvsettings"
            android:gravity="center"
            android:textSize="40sp"/>
    </LinearLayout>

@@ -36,7 +36,7 @@ import static com.example.myapplication.contacts.c4;
 import static com.example.myapplication.contacts.c5;
 
 
-public class settings extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class Setting extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private static final String TAG = "MainActivity";
 
     BluetoothAdapter mBluetoothAdapter;
@@ -206,7 +206,7 @@ public class settings extends AppCompatActivity implements AdapterView.OnItemCli
 
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
-        lvNewDevices.setOnItemClickListener(settings.this);
+        lvNewDevices.setOnItemClickListener(Setting.this);
 
 
         btnONOFF.setOnClickListener(new View.OnClickListener() {
@@ -217,20 +217,8 @@ public class settings extends AppCompatActivity implements AdapterView.OnItemCli
             }
         });
 
-        btnStartConnection.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startConnection();
-            }
-        });
 
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                byte[] bytes = etSend.getText().toString().getBytes(Charset.defaultCharset());
-                // mBluetoothConnection.write(bytes);
-            }
-        });
+
 
     }
 
@@ -352,7 +340,7 @@ public class settings extends AppCompatActivity implements AdapterView.OnItemCli
             SendMsgToContacts();
 
             mBTDevice = mBTDevices.get(i);
-            mBluetoothConnection = new BluetoothConnectionService(settings.this);
+            mBluetoothConnection = new BluetoothConnectionService(Setting.this);
         }
     }
 
