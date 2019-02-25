@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView imageEdit;
+    ImageView imageEdit,imageprofile;
     TextView tvsettings;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         imageEdit = (ImageView) findViewById(R.id.imgedit);
         tvsettings = (TextView) findViewById(R.id.tvsettings);
+        imageprofile=(ImageView)findViewById(R.id.imgprofile);
 
         checkBTpermissions();
 
@@ -40,6 +41,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(MainActivity.this, Setting.class);
+                startActivity(intent);
+            }
+        });
+
+        imageprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this,profile.class);
                 startActivity(intent);
             }
         });

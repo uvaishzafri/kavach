@@ -22,7 +22,7 @@
                android:layout_height="match_parent"
                android:src="@drawable/profile"
                android:layout_weight="1"
-               android:id="@+id/profileimg"
+               android:id="@+id/imgprofile"
                />
            <TextView
                android:layout_width="0dp"
