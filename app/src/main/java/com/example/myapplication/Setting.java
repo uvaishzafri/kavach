@@ -9,6 +9,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -21,7 +24,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.location.Location;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.nio.charset.Charset;
@@ -36,20 +41,14 @@ import static com.example.myapplication.contacts.c4;
 import static com.example.myapplication.contacts.c5;
 
 
-public class Setting extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class Setting extends AppCompatActivity implements AdapterView.OnItemClickListener  {
     private static final String TAG = "MainActivity";
 
     BluetoothAdapter mBluetoothAdapter;
     Button btnEnableDisable_Discoverable;
-
+    LocationManager locationManager;
     BluetoothConnectionService mBluetoothConnection;
-
-    Button btnStartConnection;
-    Button btnSend;
-
     SharedPreferences sharedpreferences;
-
-
     EditText etSend;
 
     private static final UUID MY_UUID_INSECURE =
@@ -194,6 +193,13 @@ public class Setting extends AppCompatActivity implements AdapterView.OnItemClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+
+        getLocation();
+
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+
+
         Button btnONOFF = (Button) findViewById(R.id.btnONOFF);
         btnEnableDisable_Discoverable = (Button) findViewById(R.id.btnDiscoverable_on_off);
         lvNewDevices = (ListView) findViewById(R.id.lvNewDevices);
@@ -320,6 +326,12 @@ public class Setting extends AppCompatActivity implements AdapterView.OnItemClic
         }
     }
 
+    public void onLocationChanged(Location location) {
+
+
+        String LOCATION="Latitude"+ location.getLatitude() + ", Longitude:" + location.getLongitude();
+    }
+
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         //first cancel discovery because its very memory intensive.
@@ -346,8 +358,6 @@ public class Setting extends AppCompatActivity implements AdapterView.OnItemClic
 
     public void SendMsgToContacts() {
         final int MY_PERMISSIONS_REQUEST_SEND_SMS = 1;
-
-
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.SEND_SMS)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -361,7 +371,10 @@ public class Setting extends AppCompatActivity implements AdapterView.OnItemClic
             }
         } else {
             SmsManager smsManager = SmsManager.getDefault();
+
+
             String smsbody="I am in danger please help me .Use life 360 app to get my live location";
+
             sharedpreferences = getSharedPreferences(MyPREFERENCES,contacts.MODE_PRIVATE);
 
             SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
@@ -374,11 +387,15 @@ public class Setting extends AppCompatActivity implements AdapterView.OnItemClic
                 String contactfive = prefs.getString(c5, "");
 
 
+
+
+
+
                 smsManager.sendTextMessage(contactone, null, smsbody, null, null);
                 smsManager.sendTextMessage(contacttwo, null, smsbody, null, null);
-                smsManager.sendTextMessage(contactthree, null, smsbody, null, null);
-                smsManager.sendTextMessage(contactfour, null, smsbody, null, null);
-                smsManager.sendTextMessage(contactfive, null, smsbody, null, null);
+               smsManager.sendTextMessage(contactthree, null, smsbody, null, null);
+               smsManager.sendTextMessage(contactfour, null, smsbody, null, null);
+               smsManager.sendTextMessage(contactfive, null, smsbody, null, null);
 
                 Toast.makeText(getApplicationContext(), "SMS sent.",
                         Toast.LENGTH_LONG).show();
@@ -386,4 +403,20 @@ public class Setting extends AppCompatActivity implements AdapterView.OnItemClic
         }
 
 }
-}
+
+
+
+
+
+
+
+    void getLocation() {
+        try {
+            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5, (LocationListener) this);
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+
+
+    }}

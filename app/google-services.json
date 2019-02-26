@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "244077000885",
+    "firebase_url": "https://my-awesome-project-10573.firebaseio.com",
+    "project_id": "my-awesome-project-10573",
+    "storage_bucket": "my-awesome-project-10573.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244077000885:android:13c3c6a65bcbec53",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "244077000885-4kslhg4ipbfjhnfttp9m758irhq3pq73.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsqV9zhjOIELq4tbP9KC80hdnLV6eYjvg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244077000885:android:24376e42dde89175",
+        "android_client_info": {
+          "package_name": "net.simplifiedcoding.RajaWater"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "244077000885-4kslhg4ipbfjhnfttp9m758irhq3pq73.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsqV9zhjOIELq4tbP9KC80hdnLV6eYjvg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
