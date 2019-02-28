@@ -9,6 +9,7 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
@@ -27,11 +28,17 @@ import java.util.Set;
 import java.util.UUID;
 
 import static com.example.myapplication.contacts.MyPREFERENCES;
+import static com.example.myapplication.contacts.MyPREFERENCES;
+import static com.example.myapplication.contacts.MyPREFERENCES;
+import static com.example.myapplication.contacts.MyPREFERENCES;
+import static com.example.myapplication.contacts.MyPREFERENCES;
+import static com.example.myapplication.contacts.MyPREFERENCES;
 import static com.example.myapplication.contacts.c1;
 import static com.example.myapplication.contacts.c2;
 import static com.example.myapplication.contacts.c3;
 import static com.example.myapplication.contacts.c4;
 import static com.example.myapplication.contacts.c5;
+
 
 public class bluemain extends Activity {
 
@@ -42,6 +49,7 @@ public class bluemain extends Activity {
     private BluetoothSocket socket;
     private OutputStream outputStream;
     private InputStream inputStream;
+    public static final String MyPREFERENCES = "MyPrefs" ;
     SharedPreferences sharedpreferences;
     Button startButton, sendButton,clearButton,stopButton;
     TextView textView;
@@ -62,6 +70,10 @@ public class bluemain extends Activity {
         editText = (EditText) findViewById(R.id.editText);
         textView = (TextView) findViewById(R.id.textView);
         setUiEnabled(false);
+
+
+
+
 
     }
 
@@ -177,7 +189,8 @@ public class bluemain extends Activity {
                             handler.post(new Runnable() {
                                 public void run()
                                 {
-
+                                    checkBTpermissions();
+                                    checkBTpermissions2();
                                    SendMsgToContacts() ;//sms with condition
                                      textView.append(string);
                                 }
@@ -224,18 +237,7 @@ public class bluemain extends Activity {
 
     public void SendMsgToContacts() {
         final int MY_PERMISSIONS_REQUEST_SEND_SMS = 1;
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.SEND_SMS)
-                != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.SEND_SMS)) {
-            } else {
-                // permission is already granted
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.SEND_SMS},
-                        MY_PERMISSIONS_REQUEST_SEND_SMS);
-            }
-        } else {
+
             SmsManager smsManager = SmsManager.getDefault();
 
 
@@ -267,5 +269,27 @@ public class bluemain extends Activity {
                         Toast.LENGTH_LONG).show();
             }
         }
+
+
+    private void checkBTpermissions()
+    {
+        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.LOLLIPOP_MR1) {
+            int permissioncheck = this.checkSelfPermission("Manifest.permission.SEND_SMS");
+
+            if (permissioncheck != 0) {
+                this.requestPermissions(new String[]{Manifest.permission.SEND_SMS}, 1001);
+            }
+        }
     }
-}
+    private void checkBTpermissions2()
+    {
+        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.LOLLIPOP_MR1) {
+            int permissioncheck = this.checkSelfPermission("Manifest.permission.ACCESS_FINE_LOCATION");
+
+            if (permissioncheck != 0) {
+                this.requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1001);
+            }
+        }
+    }
+    }
+

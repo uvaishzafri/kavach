@@ -11,11 +11,14 @@ public class mylocation implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
  Location="Current Location: " + location.getLatitude() + ", " + location.getLongitude();
+
     }
     public String getlocation()
     {
         return Location;
     }
+    public void getlatitude()
+    {}
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {

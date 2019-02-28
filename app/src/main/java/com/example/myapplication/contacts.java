@@ -77,5 +77,4 @@ contacts extends AppCompatActivity {
         });
     }
 
-    }
-
+}

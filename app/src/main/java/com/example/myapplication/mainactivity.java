@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
@@ -8,9 +9,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static android.Manifest.*;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+import static com.example.myapplication.contacts.c1;
+import static com.example.myapplication.contacts.c2;
+import static com.example.myapplication.contacts.c3;
+import static com.example.myapplication.contacts.c4;
+import static com.example.myapplication.contacts.c5;
 
 public class mainactivity extends AppCompatActivity {
 
@@ -43,7 +50,7 @@ public class mainactivity extends AppCompatActivity {
         tvsettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(mainactivity.this, Setting.class);
+                Intent intent=new Intent(mainactivity.this, bluemain.class);
                 startActivity(intent);
             }
         });
