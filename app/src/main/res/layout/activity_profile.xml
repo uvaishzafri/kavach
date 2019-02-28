@@ -1,39 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".profile">
+    tools:context=".profile"
+    android:background="@drawable/main_background">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            app:boxStrokeColor="#33C4FF"
+            android:textColorHint="#FFFFFF"
+            app:boxBackgroundColor="#FFFFFF">
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:hint="Name"
+            android:textColor="#FFFFFF"
+            android:textColorLink="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:shadowColor="#FFFFFF"
             android:layout_weight="1"
             android:id="@+id/edtname"/>
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            app:boxStrokeColor="#33C4FF"
+            android:textColorHint="#FFFFFF"
+            app:boxBackgroundColor="#FFFFFF">
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:hint="Address"
             android:layout_weight="2"
+            android:textColor="#FFFFFF"
+            android:textColorLink="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:shadowColor="#FFFFFF"
 
             android:id="@+id/edtaddress"/>
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/mail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            app:boxStrokeColor="#33C4FF"
+            android:textColorHint="#FFFFFF"
+            app:boxBackgroundColor="#FFFFFF">
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:hint="e-mail"
+            android:textColor="#FFFFFF"
+            android:textColorLink="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:shadowColor="#FFFFFF"
             android:layout_weight="1"
             android:id="@+id/edtmail"/>
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            app:boxStrokeColor="#33C4FF"
+            android:textColorHint="#FFFFFF"
+            app:boxBackgroundColor="#FFFFFF">
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:hint="phone number"
             android:layout_weight="1"
+            android:textColor="#FFFFFF"
+            android:textColorLink="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:shadowColor="#FFFFFF"
             android:id="@+id/edtnumber"/>
+        </android.support.design.widget.TextInputLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -41,9 +98,9 @@
             android:id="@+id/btnsave"
             android:gravity="center"
             android:textSize="40sp"
-            android:background="#FFFFFF"
+            android:textColor="#33C4FF"
             android:text="SAVE"
             />
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

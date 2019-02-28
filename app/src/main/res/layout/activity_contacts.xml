@@ -4,57 +4,122 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".contacts">
+    tools:context=".contacts"
+    android:background="@drawable/main_background">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:ignore="ExtraText">
+        tools:ignore="ExtraText"
+       >
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/ContactOne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:textColorHint="#FFFFFF"
+            app:boxBackgroundColor="#FFFFFF"
+           >
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:hint="CONTACT ONE"
+            android:layout_height="match_parent"
+            android:hint="Contact One"
             tools:ignore="Suspicious0dp"
-            android:textColor="#33C4FF"
+            android:textColor="#FFFFFF"
+            android:textColorLink="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:shadowColor="#FFFFFF"
             android:id="@+id/etContactOne"/>
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/ContactTwo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            app:boxStrokeColor="#33C4FF"
+            android:textColorHint="#FFFFFF"
+            app:boxBackgroundColor="#FFFFFF">
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:hint="CONTACT TWO"
+            android:layout_height="match_parent"
+            android:hint="Contact Two"
             tools:ignore="Suspicious0dp"
-            android:textColor="#33C4FF"
+            android:textColor="#FFFFFF"
+            android:textColorLink="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:shadowColor="#FFFFFF"
             android:id="@+id/etContactTwo"/>
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/ContactThree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            app:boxStrokeColor="#33C4FF"
+            android:textColorHint="#FFFFFF"
+            app:boxBackgroundColor="#FFFFFF">
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:hint="CONTACT THREE"
+            android:layout_height="match_parent"
+            android:hint="Contact Three"
             tools:ignore="Suspicious0dp"
-            android:textColor="#33C4FF"
+            android:textColor="#FFFFFF"
+            android:textColorLink="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:shadowColor="#FFFFFF"
             android:id="@+id/etContactThree"/>
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/ContactFour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            app:boxStrokeColor="#33C4FF"
+            android:textColorHint="#FFFFFF"
+            app:boxBackgroundColor="#FFFFFF">
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:hint="CONTACT FOUR"
+            android:layout_height="match_parent"
+            android:hint="Contact Four"
             tools:ignore="Suspicious0dp"
-            android:textColor="#33C4FF"
+            android:textColor="#FFFFFF"
+            android:textColorLink="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:shadowColor="#FFFFFF"
             android:id="@+id/etContactFour"/>
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/ContactFive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            app:boxStrokeColor="#33C4FF"
+            android:textColorHint="#FFFFFF"
+            app:boxBackgroundColor="#FFFFFF">
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:hint="CONTACT FIVE"
+            android:layout_height="match_parent"
+            android:hint="Contact Five"
             tools:ignore="Suspicious0dp"
-            android:textColor="#33C4FF"
+            android:textColor="#FFFFFF"
+            android:textColorLink="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:shadowColor="#FFFFFF"
             android:id="@+id/etContactFive"/>
+        </android.support.design.widget.TextInputLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight=".6"
-            android:orientation="horizontal">
+            android:layout_weight="2"
+            android:orientation="horizontal"
+
+            >
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

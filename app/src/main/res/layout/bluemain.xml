@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+
+    <RelativeLayout tools:context=".bluemain"  android:layout_height="match_parent" android:layout_width="match_parent"
+
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditText android:layout_height="wrap_content"
+        android:layout_width="wrap_content" android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true" android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true" android:layout_alignParentTop="true"
+        android:id="@+id/editText"/>
+
+    <Button android:layout_height="wrap_content"
+        android:layout_width="wrap_content" android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true" android:id="@+id/buttonStart"
+        android:onClick="onClickStart" android:layout_below="@+id/editText" android:text="Begin"/>
+
+    <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/buttonSend"
+        android:onClick="onClickSend" android:layout_below="@+id/editText" android:text="Send" android:layout_toEndOf="@+id/buttonStart" android:layout_toRightOf="@+id/buttonStart"/>
+
+    <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true" android:id="@+id/textView" android:layout_below="@+id/buttonSend"
+        android:singleLine="true" android:layout_alignParentBottom="true" android:layout_alignEnd="@+id/editText"
+        android:layout_alignRight="@+id/editText"/>
+
+    <Button android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:id="@+id/buttonStop" android:onClick="onClickStop" android:layout_below="@+id/editText"
+        android:text="Stop" android:layout_toEndOf="@+id/buttonSend" android:layout_toRightOf="@+id/buttonSend"/>
+
+    <Button android:layout_height="wrap_content" android:layout_width="wrap_content"
+        android:id="@+id/buttonClear" android:onClick="onClickClear" android:layout_below="@+id/editText"
+        android:text="Clear" android:layout_toEndOf="@+id/buttonStop" android:layout_toRightOf="@+id/buttonStop"/>
+
+</RelativeLayout>

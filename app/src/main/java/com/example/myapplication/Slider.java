@@ -101,7 +101,7 @@ public class Slider extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         //Toast.makeText(Slider.this, "Welcome", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(Slider.this,MainActivity.class);
+                        Intent i = new Intent(Slider.this, mainactivity.class);
                         startActivity(i);
                     }
                 });
