@@ -40,9 +40,7 @@ public class profile extends AppCompatActivity {
         save=(TextView) findViewById(R.id.btnsave);
 
         sharedpreferences = getSharedPreferences(MyPREFERENCES,contacts.MODE_PRIVATE);
-
         SharedPreferences prefs = getSharedPreferences(MyPREFERENCES, MODE_PRIVATE);
-
 
         if (sharedpreferences!= null) {
             String namepref = prefs.getString(n,"" );
@@ -58,9 +56,7 @@ public class profile extends AppCompatActivity {
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
-
+            public void onClick(View v) {   //for saving user details
 
                 String adrress1=address.getText().toString();
                 String name1=name.getText().toString();
