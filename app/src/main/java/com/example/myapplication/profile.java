@@ -8,21 +8,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import static com.example.myapplication.contacts.c1;
-import static com.example.myapplication.contacts.c2;
-import static com.example.myapplication.contacts.c3;
-import static com.example.myapplication.contacts.c4;
-
 public class profile extends AppCompatActivity {
 
     EditText name,address,mobile,mail;
     TextView save;
 
     public static final String MyPREFERENCES = "MyPrefs" ;
-    public static final String n= "nm";
-    public static final String a = "adrs";
-    public static final String m = "mbl";
-    public static final String e = "emal";
+    public static final String n= "name";
+    public static final String a = "address";
+    public static final String m = "mobile";
+    public static final String e = "email";
 
     SharedPreferences sharedpreferences;
 
@@ -51,7 +46,6 @@ public class profile extends AppCompatActivity {
             address.setText(addresspref);
             mobile.setText(mobilepref);
             mail.setText(mailpref);
-
         }
 
         save.setOnClickListener(new View.OnClickListener() {
