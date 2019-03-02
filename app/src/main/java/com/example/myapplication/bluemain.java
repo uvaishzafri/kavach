@@ -9,9 +9,15 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.telephony.SmsManager;
@@ -24,6 +30,7 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -58,7 +65,10 @@ public class bluemain extends Activity {
     Thread thread;
     byte buffer[];
     int bufferPosition;
+    LocationManager locationManager;
     boolean stopThread;
+    String string;
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +80,10 @@ public class bluemain extends Activity {
         editText = (EditText) findViewById(R.id.editText);
         textView = (TextView) findViewById(R.id.textView);
         setUiEnabled(false);
+        checkBTpermissions();
+        checkBTpermissions2();
+        checkBTpermissions3();
+
 
 
 
@@ -238,10 +252,11 @@ public class bluemain extends Activity {
     public void SendMsgToContacts() {
         final int MY_PERMISSIONS_REQUEST_SEND_SMS = 1;
 
+
             SmsManager smsManager = SmsManager.getDefault();
 
 
-            String smsbody="I am in danger please help me .Use life 360 app to get my live location";
+            String smsbody="I am in danger please help me."+string+"Use life 360 app to get my live location";
 
             sharedpreferences = getSharedPreferences(MyPREFERENCES,contacts.MODE_PRIVATE);
 
@@ -289,6 +304,122 @@ public class bluemain extends Activity {
             if (permissioncheck != 0) {
                 this.requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1001);
             }
+        }
+    }
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void checkBTpermissions3()
+    {
+        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.LOLLIPOP_MR1) {
+            int permissioncheck = this.checkSelfPermission("Manifest.permission.ACCESS_COARSE_LOCATION");
+
+            if (permissioncheck != 0) {
+                this.requestPermissions(new String[]{Manifest.permission.SEND_SMS}, 1001);
+            }
+        }
+    }
+
+    void location(){//for fetching user location
+
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        if(locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+
+                double latitude=location.getLatitude();
+                double longitude=location.getLongitude();
+
+                Geocoder geocoder=new Geocoder(getApplicationContext());
+                try {
+                    List<Address> addressList=geocoder.getFromLocation(latitude,longitude,1);
+                    String str=addressList.get(0).getLocality();
+                    str+=","+addressList.get(0).getAdminArea();
+                    str+=","+addressList.get(0).getSubAdminArea();
+                    str+=","+addressList.get(0).getPremises();
+                    str+=","+addressList.get(0).getPostalCode();
+                    str+=","+addressList.get(0).getLocale();
+                    str+=","+addressList.get(0).getAddressLine(0);
+                    str+=","+addressList.get(0).getLocality();
+                    str+=","+addressList.get(0).getSubLocality();
+                    str+=","+addressList.get(0).getLatitude();
+                    str+=","+addressList.get(0).getLongitude();
+                    str += " , " + addressList.get(0).getCountryName();
+                    str+=" ";
+                   string+="my current location is ";
+                    string+=str;
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+
+            }
+        });}
+        else  if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new LocationListener() {
+                @Override
+                public void onLocationChanged(Location location) {
+                    double latitude = location.getLatitude();
+                    double longitude = location.getLongitude();
+
+                    Geocoder geocoder = new Geocoder(getApplicationContext());
+                    try {
+                        List<Address> addressList = geocoder.getFromLocation(latitude, longitude, 1);
+                        String str = addressList.get(0).getLocality();
+                        str+=","+addressList.get(0).getAdminArea();
+                        str+=","+addressList.get(0).getSubAdminArea();
+                        str+=","+addressList.get(0).getPremises();
+                        str+=","+addressList.get(0).getLocale();
+                        str += " , " + addressList.get(0).getCountryName();
+                       string+=str;
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+                @Override
+                public void onStatusChanged(String provider, int status, Bundle extras) {
+
+                }
+
+                @Override
+                public void onProviderEnabled(String provider) {
+
+                }
+
+                @Override
+                public void onProviderDisabled(String provider) {
+
+                }
+            });
+        }
+        else{
+           string+="sorry,Unable to get location";
         }
     }
     }
