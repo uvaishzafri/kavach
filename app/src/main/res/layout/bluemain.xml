@@ -37,7 +37,6 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:id="@+id/buttonStart"
-        android:onClick="onClickStart"
         android:layout_below="@+id/editText"
         android:text="Begin"/>
 
@@ -89,4 +88,22 @@
        android:layout_alignEnd="@+id/editText"
        android:layout_alignRight="@+id/editText"/>
         </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:orientation="horizontal">
+        <TextView android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/textView2"
+            android:layout_below="@+id/buttonSend"
+            android:text=""
+            android:singleLine="true"
+            android:layout_alignParentBottom="true"
+            android:layout_alignEnd="@+id/editText"
+            android:layout_alignRight="@+id/editText"/>
+    </LinearLayout>
 </LinearLayout>
